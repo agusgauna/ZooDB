@@ -4,12 +4,12 @@ public class Especie {
     private Integer id;
     private String nombreVulgar;
     private  String nombreCientifico;
-    private boolean extincion;
+    private Boolean extincion;
     private Family family;
 
     public Especie() {}
 
-    public Especie(Integer id, String nombreVulgar, String nombreCientifico, boolean extincion, Family family) {
+    public Especie(Integer id, String nombreVulgar, String nombreCientifico, Boolean extincion, Family family) {
         this.id = id;
         this.nombreVulgar = nombreVulgar;
         this.nombreCientifico = nombreCientifico;
@@ -45,7 +45,7 @@ public class Especie {
         return extincion;
     }
 
-    public void setExtincion(boolean extincion) {
+    public void setExtincion(Boolean extincion) {
         this.extincion = extincion;
     }
 
