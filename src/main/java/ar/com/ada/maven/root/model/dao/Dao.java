@@ -8,9 +8,9 @@ public interface Dao<T> {
 
     T findById(Integer id);
 
-    Boolean save(T t);
+    boolean save(T t);
 
-    Boolean update(T t, Integer id);
+    boolean update(T t, Integer id);
 
     Boolean delete(Integer id);
 }
