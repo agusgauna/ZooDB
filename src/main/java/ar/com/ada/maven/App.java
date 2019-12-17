@@ -1,7 +1,9 @@
 package ar.com.ada.maven;
 
 import ar.com.ada.maven.root.model.dao.ContinentDAO;
+import ar.com.ada.maven.root.model.dao.Dao;
 import ar.com.ada.maven.root.model.dao.PaisDAO;
+import ar.com.ada.maven.root.model.dto.Continent;
 import ar.com.ada.maven.root.model.dto.Pais;
 
 import java.io.IOException;
@@ -21,8 +23,8 @@ public class App
 
         // get by ID
 //        Continent continent = dao.findById(2);
-//        if (continent != null)
-//            System.out.println(continent.toString());
+//       if (continent != null)
+//           System.out.println(continent.toString());
 
         // update
 //        Continent continentUpdate = new Continent("América");
@@ -33,15 +35,19 @@ public class App
 //        else
 //            System.out.println("NO se pudo realizar la actualizacion");
 
-        ArrayList<Pais> paises = paisDAO.findAll();
+//        ArrayList<Pais> paises = paisDAO.findAll();
 
-        paises.forEach(pais -> {
-            String paisNombre = pais.getNombre();
-            String continentNombre = pais.getContinent().getNombre();
-            System.out.println("Continete: " + continentNombre + " Pais: " + paisNombre);
-        });
+  //      paises.forEach(pais -> {
+    //        String paisNombre = pais.getNombre();
+        //      String continentNombre = pais.getContinent().getNombre();
+        //    System.out.println("Continete: " + continentNombre + " Pais: " + paisNombre);
+        // });
 
-        paises.forEach(pais -> System.out.println(pais.toString()));
+//        paises.forEach(pais -> System.out.println(pais.toString()));
 
+        Pais pais = paisDAO.findById(2);
+        if (pais != null) {
+            System.out.println(pais.toString());
+        }
     }
 }

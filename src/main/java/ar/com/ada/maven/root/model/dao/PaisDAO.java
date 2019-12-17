@@ -48,8 +48,9 @@ public class PaisDAO implements Dao<Pais> {
                         preparedStatement.setInt(1, id);
                         ResultSet rs = preparedStatement.executeQuery();
                         Continent continent = continentDAO.findById(rs.getInt("id_continent"));
-                        if (rs.next())
+                        if (rs.next()) {
                                 pais = new Pais(rs.getInt("id"), rs.getString("Nombre"), continent);
+                        }
                         if (willCloseConnection)
                                 connection.close();
                 } catch (Exception e) {
