@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="ZooDB" target="1.7" />
+      <module name="ZooDB" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>

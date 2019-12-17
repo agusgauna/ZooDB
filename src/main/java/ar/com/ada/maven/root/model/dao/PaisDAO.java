@@ -11,6 +11,12 @@ public class PaisDAO implements Dao<Pais> {
         private ContinentDAO continentDAO = new ContinentDAO(false);
         private Boolean willCloseConnection = true;
 
+        public PaisDAO() { }
+
+        public PaisDAO(Boolean willCloseConnection) {
+                this.willCloseConnection = willCloseConnection;
+        }
+
         @Override
         public ArrayList<Pais> findAll() {
                 String sql = "SELECT * FROM Pais";
@@ -43,7 +49,7 @@ public class PaisDAO implements Dao<Pais> {
                         ResultSet rs = preparedStatement.executeQuery();
                         Continent continent = continentDAO.findById(rs.getInt("id_continent"));
                         if (rs.next())
-                                pais = new Pais(rs.getInt("id"), rs.getString("Nombre"), continent;
+                                pais = new Pais(rs.getInt("id"), rs.getString("Nombre"), continent);
                         if (willCloseConnection)
                                 connection.close();
                 } catch (Exception e) {
