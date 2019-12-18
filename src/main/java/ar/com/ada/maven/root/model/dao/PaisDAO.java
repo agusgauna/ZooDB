@@ -28,7 +28,7 @@ public class PaisDAO implements Dao<Pais> {
                         while (rs.next()) {
                                 // con el campo Continent_id busco el continente con el dao de Continent
                                 Continent continent = continentDAO.findById(rs.getInt("Continent_id"));
-                                Pais pais = new Pais(rs.getInt("id"), rs.getString("name"), continent);
+                                Pais pais = new Pais(rs.getInt("id"), rs.getString("nombre"), continent);
                                 paises.add(pais);
                         }
                         connection.close();
@@ -47,8 +47,8 @@ public class PaisDAO implements Dao<Pais> {
                         PreparedStatement preparedStatement = connection.prepareStatement(sql);
                         preparedStatement.setInt(1, id);
                         ResultSet rs = preparedStatement.executeQuery();
-                        Continent continent = continentDAO.findById(rs.getInt("id_continent"));
                         if (rs.next()) {
+                                Continent continent = continentDAO.findById(rs.getInt("continent_id"));
                                 pais = new Pais(rs.getInt("id"), rs.getString("Nombre"), continent);
                         }
                         if (willCloseConnection)

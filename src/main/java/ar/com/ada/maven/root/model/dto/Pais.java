@@ -41,6 +41,6 @@ public class Pais {
     public String toString() {
         return "El id del pais es: " + id +
                 ". El nombre del pais es :" + nombre +
-                ". El continente es: " + continent;
+                ". " + continent;
     }
 }
