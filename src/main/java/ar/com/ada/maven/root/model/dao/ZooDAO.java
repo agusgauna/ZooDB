@@ -17,8 +17,8 @@ public class ZooDAO implements Dao<Zoo> {
 
     public ZooDAO() {}
 
-    public ZooDAO(CiudadDAO ciudadDAO) {
-        this.ciudadDAO = ciudadDAO;
+    public ZooDAO(Boolean willCloseConnection) {
+        this.willCloseConnection = willCloseConnection;
     }
 
     @Override
@@ -66,12 +66,14 @@ public class ZooDAO implements Dao<Zoo> {
 
     @Override
     public boolean save(Zoo zoo) {
-        String sql = "INSERT INTO Zoo (nombre) VALUES ? ";
+        String sql = "INSERT INTO Zoo (nombre, tamaño, presupuesto) VALUES (?,?,?) ";
         int hasInsert = 0;
         try {
             Connection connection = DBConection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, zoo.getNombre());
+            preparedStatement.setString(1, zoo.getTamaño());
+            preparedStatement.setInt(1, zoo.getPresupuesto());
             hasInsert = preparedStatement.executeUpdate();
             connection.close();
         } catch (Exception e) {

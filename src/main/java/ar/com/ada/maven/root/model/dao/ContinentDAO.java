@@ -27,7 +27,7 @@ public class ContinentDAO implements Dao<Continent> {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
-                Continent continent = new Continent(rs.getInt("id"), rs.getString("name"));
+                Continent continent = new Continent(rs.getInt("id"), rs.getString("nombre"));
                 continents.add(continent);
             }
             connection.close();

@@ -2,13 +2,13 @@ package ar.com.ada.maven.root.model.dto;
 
 public class Family {
     private Integer id;
-    private String name;
+    private String nombre;
 
     public Family() {}
 
-    public Family(Integer id, String name) {
+    public Family(Integer id, String nombre) {
         this.id = id;
-        this.name = name;
+        this.nombre = nombre;
     }
 
     public Integer getId() {
@@ -19,12 +19,12 @@ public class Family {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     @Override
