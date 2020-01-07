@@ -30,6 +30,6 @@ public class Family {
     @Override
     public String toString() {
         return "El id de la familia es: " + id +
-                ". El nombre de la familia es: " + name;
+                ". El nombre de la familia es: " + nombre;
     }
 }
