@@ -13,4 +13,11 @@ public class ScannerSingletone {
         }
         return scanner;
     }
+
+    public static void pressEnterKeyToContinue() {
+        System.out.println("Presione la tecla Enter para continuar...");
+        try {
+            System.in.read();
+        } catch (Exception e) {}
+    }
 }

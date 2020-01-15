@@ -1,5 +1,6 @@
 package ar.com.ada.maven;
 
+import ar.com.ada.maven.root.controller.MainController;
 import ar.com.ada.maven.root.model.dao.ContinentDAO;
 import ar.com.ada.maven.root.model.dao.Dao;
 import ar.com.ada.maven.root.model.dao.PaisDAO;
@@ -9,13 +10,11 @@ import ar.com.ada.maven.root.model.dto.Pais;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class App
-{
-    public static void main(String[] args) throws IOException {
-
-
-        ContinentDAO dao = new ContinentDAO();
-        PaisDAO paisDAO = new PaisDAO();
+public class App {
+    public static void main(String[] args) {
+        MainController.run();
+   //     ContinentDAO dao = new ContinentDAO();
+     //   PaisDAO paisDAO = new PaisDAO();
 //        List<Continent> continentList = dao.findAll();
 //
 //        // Lambda
@@ -45,9 +44,8 @@ public class App
 
 //        paises.forEach(pais -> System.out.println(pais.toString()));
 
-        Pais pais = paisDAO.findById(2);
-        if (pais != null) {
-            System.out.println(pais.toString());
-        }
+     //   Pais pais = paisDAO.findById(2);
+     //   if (pais != null) {
+     //       System.out.println(pais.toString());
     }
 }

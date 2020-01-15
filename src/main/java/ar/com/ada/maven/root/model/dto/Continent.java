@@ -6,6 +6,10 @@ public class Continent {
 
     public Continent() {}
 
+    public Continent(String nombre) {
+        this.nombre = nombre;
+    }
+
     public Continent(Integer id, String nombre) {
         this.id = id;
         this.nombre = nombre;
