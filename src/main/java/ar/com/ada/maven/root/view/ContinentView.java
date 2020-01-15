@@ -3,6 +3,7 @@ package ar.com.ada.maven.root.view;
 import ar.com.ada.maven.root.model.dao.ContinentDAO;
 import ar.com.ada.maven.root.model.dto.Continent;
 import ar.com.ada.maven.root.utils.ScannerSingletone;
+import jdk.internal.jline.internal.Ansi;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -65,10 +66,12 @@ public class ContinentView {
         System.out.println("El continente no se ha podido agregar");
         ScannerSingletone.pressEnterKeyToContinue();
     }
+
     public void continentAlreadyExists(String name) {
         System.out.println("El continente ya existe en la base de datos");
         ScannerSingletone.pressEnterKeyToContinue();
     }
+
     public String printContinentsPerPage(List<Continent> continents, List<String> paginator) {
         System.out.println("\n+----------------------------------------------------------------+");
         System.out.println("\t  Zoo World App :: Modulo Continente  :: Lista Continente");
@@ -77,7 +80,7 @@ public class ContinentView {
         Scanner keyboard = ScannerSingletone.getInstance();
 
         while (true) {
-            try{
+            try {
                 System.out.println("? ");
                 String nombre = keyboard.nextLine().trim();
                 while (!nombre.matches("^[0-9IiAaSsUuEe]+$") && !nombre.isEmpty()) {
@@ -90,5 +93,26 @@ public class ContinentView {
                 keyboard.next();
             }
         }
+    }
+
+    public int continentIdSelected(String action) {
+        System.out.println("Ingrese el numero de ID del continente para" + action + "o 0 para cancelar: \n");
+
+        Scanner keyboard = ScannerSingletone.getInstance();
+
+        while (true) {
+            try {
+                System.out.println("? ");
+                int choice = keyboard.nextInt();
+                return choice;
+            } catch (InputMismatchException e) {
+                System.out.println("Error, debe ingresar un id valido");
+                keyboard.next();
+            }
+        }
+    }
+    public static String getNameToUpdate(Continent continent) {
+        System.out.println("Se actualizara el nombre del siguiente continente: ");
+        System.out.println(Ansi.);
     }
 }
