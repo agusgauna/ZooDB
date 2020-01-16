@@ -2,8 +2,8 @@ package ar.com.ada.maven.root.view;
 
 import ar.com.ada.maven.root.model.dao.ContinentDAO;
 import ar.com.ada.maven.root.model.dto.Continent;
+import ar.com.ada.maven.root.utils.Ansi;
 import ar.com.ada.maven.root.utils.ScannerSingletone;
-import jdk.internal.jline.internal.Ansi;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -113,6 +113,39 @@ public class ContinentView {
     }
     public static String getNameToUpdate(Continent continent) {
         System.out.println("Se actualizara el nombre del siguiente continente: ");
-        System.out.println(Ansi.);
+        System.out.println(Ansi.PURPLE + continent.getId() + "\t" + continent.getNombre() + Ansi.RESET);
+
+        System.out.println("Ingrese el nombre del continente para actualizar ");
+        System.out.println("(para cancelar, no ingresar datos y presionar enter):\n");
+
+        Scanner keyboard = ScannerSingletone.getInstance();
+        keyboard.nextLine();
+
+        while (true) {
+            try {
+                System.out.println("? ");
+                String name = keyboard.nextLine().trim();
+                while (!name.matches("^[A-Za-záéíóúÁÉÍÓÚüÜ\\s]+$")  && !name.isEmpty()) {
+                    System.out.println("Error, debe ingresar un dato valido");
+                    name = keyboard.nextLine();
+                }
+                return name;
+            } catch (InputMismatchException e) {
+                System.out.println("Error, debe ingresar un dato valido");
+                keyboard.next();
+            }
+        }
+    }
+    public void continentNotExist(int id) {
+        System.out.println("No existe un continente con el id " + id + "asociado");
+        System.out.println("Seleccione un ID valido o 0 para cancelar");
+    }
+    public void updateContinentCanceled() {
+        System.out.println("Ha cancelado la actualizacion del continente\n");
+        ScannerSingletone.pressEnterKeyToContinue();
+    }
+    public void showUpdateContinent(String name) {
+        System.out.println("El continente " + name + " se ha actualizado exitosamente");
+        ScannerSingletone.pressEnterKeyToContinue();
     }
 }

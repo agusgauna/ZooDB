@@ -76,7 +76,7 @@ public class ContinentController {
         return pages;
     }
 
-    private static int continentListPerPage() {
+    private static Integer continentListPerPage() {
         int limit = 3, currentPage = 0;
         List<Continent> continents;
         int numberContinents;
@@ -117,9 +117,6 @@ public class ContinentController {
         }
         return 0;
     }
-    private static void edithContinent() {
-        continentListPerPage();
-    }
 
     public static void editSelectedContinent(int id) {
         Continent continent = continentDAO.findById(id);
@@ -143,5 +140,12 @@ public class ContinentController {
             else
                 view.updateContinentCanceled();
         }
+    }
+    private static void edithContinent() {
+        int continentIdToEdith = continentListPerPage();
+        if (continentIdToEdith != 0)
+            editSelectedContinent(continentIdToEdith);
+        else
+            view.updateContinentCanceled();
     }
 }
