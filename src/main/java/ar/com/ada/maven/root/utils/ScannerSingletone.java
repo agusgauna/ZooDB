@@ -18,6 +18,8 @@ public class ScannerSingletone {
         System.out.println("Presione la tecla Enter para continuar...");
         try {
             System.in.read();
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            System.out.println("ERROR MESSAGE: " + e.getMessage());
+        }
     }
 }

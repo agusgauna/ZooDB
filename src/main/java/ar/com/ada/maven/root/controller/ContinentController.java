@@ -123,7 +123,11 @@ public class ContinentController {
         if (continent != null) {
             String nameToUpdate = view.getNameToUpdate(continent);
             if (!nameToUpdate.isEmpty()) {
-                continentDAO.findByName(nameToUpdate);
+                Continent continent2 = continentDAO.findByName(nameToUpdate);
+
+                if (continent2 != null && continent2.getId() != id) {
+                    view.continentAlreadyExists(nameToUpdate);
+                }
                 continent.setNombre(nameToUpdate);
 
                 Boolean isSaved = continentDAO.update(continent, id);
@@ -147,5 +151,6 @@ public class ContinentController {
             editSelectedContinent(continentIdToEdith);
         else
             view.updateContinentCanceled();
+        continentListPerPage();
     }
 }
