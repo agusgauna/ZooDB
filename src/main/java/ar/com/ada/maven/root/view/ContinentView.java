@@ -77,7 +77,18 @@ public class ContinentView {
         System.out.println("\t  Zoo World App :: Modulo Continente  :: Lista Continente");
         System.out.println("+----------------------------------------------------------------+\n");
 
+        System.out.println("ID\t|\tCONTINENTE");
+        continents.forEach(continent -> {
+            System.out.println(continent.getId() + "\t|\t"+ continent.getNombre());
+        });
+
+        System.out.println("\n+------------------------------------------------------------------");
+        paginator.forEach(page -> System.out.println(page + " "));
+        System.out.println("[Editar]");
+        System.out.println("\n+------------------------------------------------------------------+\n");
+
         Scanner keyboard = ScannerSingletone.getInstance();
+        keyboard.nextLine();
 
         while (true) {
             try {
