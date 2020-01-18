@@ -33,7 +33,9 @@ public class Continent {
 
     @Override
     public String toString() {
-        return "El id del continente es: " + id +
-                ". El nombre del continente es: " + nombre;
+        return "Continent{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                '}';
     }
 }

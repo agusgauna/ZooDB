@@ -79,7 +79,7 @@ public class ContinentView {
 
         System.out.println("ID\t|\tCONTINENTE");
         continents.forEach(continent -> {
-            System.out.println(continent.getId() + "\t|\t"+ continent.getNombre());
+            System.out.println(continent.getId() + "\t|\t" + continent.getNombre());
         });
 
         System.out.println("\n+------------------------------------------------------------------");
@@ -107,7 +107,7 @@ public class ContinentView {
     }
 
     public int continentIdSelected(String action) {
-        System.out.println("Ingrese el numero de ID del continente para" + action + "o 0 para cancelar: \n");
+        System.out.println("Ingrese el numero de ID del continente para " + action + " o 0 para cancelar: \n");
 
         Scanner keyboard = ScannerSingletone.getInstance();
 
@@ -122,6 +122,7 @@ public class ContinentView {
             }
         }
     }
+
     public static String getNameToUpdate(Continent continent) {
         System.out.println("Se actualizara el nombre del siguiente continente: ");
         System.out.println(Ansi.PURPLE + continent.getId() + "\t" + continent.getNombre() + Ansi.RESET);
@@ -136,7 +137,7 @@ public class ContinentView {
             try {
                 System.out.println("? ");
                 String name = keyboard.nextLine().trim();
-                while (!name.matches("^[A-Za-záéíóúÁÉÍÓÚüÜ\\s]+$")  && !name.isEmpty()) {
+                while (!name.matches("^[A-Za-záéíóúÁÉÍÓÚüÜ\\s]+$") && !name.isEmpty()) {
                     System.out.println("Error, debe ingresar un dato valido");
                     name = keyboard.nextLine();
                 }
@@ -147,16 +148,88 @@ public class ContinentView {
             }
         }
     }
+
     public void continentNotExist(int id) {
         System.out.println("No existe un continente con el id " + id + "asociado");
         System.out.println("Seleccione un ID valido o 0 para cancelar");
     }
+
     public void updateContinentCanceled() {
         System.out.println("Ha cancelado la actualizacion del continente\n");
         ScannerSingletone.pressEnterKeyToContinue();
     }
+
     public void showUpdateContinent(String name) {
         System.out.println("El continente " + name + " se ha actualizado exitosamente");
         ScannerSingletone.pressEnterKeyToContinue();
+    }
+
+    public void deleteContinentCanceled() {
+        System.out.println("Se ha cancelado el borrado del continente");
+        ScannerSingletone.pressEnterKeyToContinue();
+    }
+
+    public void showDeleteContinent(String name) {
+        System.out.println("El continente " + name + " se ha eliminado exitosamente");
+    }
+
+    public static String getNameToDelete(Continent continent) {
+        System.out.println("Se borrara el siguiente continente: ");
+        System.out.println(Ansi.PURPLE + continent.getId() + "\t" + continent.getNombre() + Ansi.RESET);
+
+        System.out.println("Ingrese el nombre del continente para eliminar ");
+        System.out.println("Esta seguro que desea eliminar el continente?\n");
+
+        Scanner keyboard = ScannerSingletone.getInstance();
+        keyboard.nextLine();
+
+        while (true) {
+            try {
+                System.out.println("? ");
+                String name = keyboard.nextLine().trim();
+                while (!name.matches("^[A-Za-záéíóúÁÉÍÓÚüÜ\\s]+$") && !name.isEmpty()) {
+                    System.out.println("Error, debe ingresar un dato valido");
+                    name = keyboard.nextLine();
+                }
+                return name;
+            } catch (InputMismatchException e) {
+                System.out.println("Error, debe ingresar un dato valido");
+                keyboard.next();
+            }
+        }
+    }
+
+    public String printContinentsPerPage2(List<Continent> continents, List<String> paginator) {
+        System.out.println("\n+----------------------------------------------------------------+");
+        System.out.println("\t  Zoo World App :: Modulo Continente  :: Lista Continente");
+        System.out.println("+----------------------------------------------------------------+\n");
+
+        System.out.println("ID\t|\tCONTINENTE");
+        continents.forEach(continent -> {
+            System.out.println(continent.getId() + "\t|\t" + continent.getNombre());
+        });
+
+        System.out.println("\n+------------------------------------------------------------------");
+        paginator.forEach(page -> System.out.println(page + " "));
+        System.out.println("[Eliminar]");
+        System.out.println("\n+------------------------------------------------------------------+\n");
+
+        Scanner keyboard = ScannerSingletone.getInstance();
+        keyboard.nextLine();
+
+        while (true) {
+            try {
+                System.out.println("? ");
+                String nombre = keyboard.nextLine().trim();
+                while (!nombre.matches("^[0-9IiAaSsUuEe]+$") && !nombre.isEmpty()) {
+                    System.out.println("Error, debe ingresar una opcion valida");
+                    nombre = keyboard.nextLine();
+                }
+                return nombre;
+            } catch (InputMismatchException e) {
+                System.out.println("Error, debe ingresar un dato valido");
+                keyboard.next();
+            }
+        }
     }
 }

@@ -31,6 +31,9 @@ public class ContinentController {
                 case 3:
                     edithContinent();
                     break;
+                case 4:
+                    deleteContinent();
+                    break;
                 case 5:
                     a = true;
                     break;
@@ -46,7 +49,7 @@ public class ContinentController {
             Continent newContinent = new Continent(nombreContinent);
             Continent byName = continentDAO.findByName(nombreContinent);
 
-            if (nombreContinent != null && newContinent.getNombre().equals(byName.getNombre())) {
+            if (byName != null && byName.getNombre().toLowerCase().equals(newContinent.getNombre().toLowerCase())) {
                 view.continentAlreadyExists(newContinent.getNombre());
             } else {
                 Boolean resultado = continentDAO.save(newContinent);
@@ -152,5 +155,82 @@ public class ContinentController {
         else
             view.updateContinentCanceled();
         continentListPerPage();
+    }
+    private static Integer continentListPerPage2() {
+        int limit = 3, currentPage = 0;
+        List<Continent> continents;
+        int numberContinents;
+        int totalPages;
+        List<String> paginator;
+        Boolean shouldGetOut = false;
+        while (!shouldGetOut) {
+            continents = continentDAO.findAll(limit, currentPage * limit);
+            numberContinents = continentDAO.getTotalContinents();
+            totalPages = (int) Math.ceil((double) numberContinents / limit);
+            paginator = buildPaginator(currentPage, totalPages);
+            String choice = view.printContinentsPerPage2(continents, paginator);
+            switch (choice) {
+                case "i": case "I":
+                    currentPage = 0;
+                    break;
+                case "a": case "A":
+                    if (currentPage > 0) currentPage--;
+                    break;
+                case "s": case "S":
+                    if (currentPage + 1 < totalPages) currentPage++;
+                    break;
+                case "u": case "U":
+                    currentPage = totalPages - 1;
+                    break;
+                case "e": case "E":
+                    return view.continentIdSelected("Eliminar");
+                case "q": case "Q":
+                    shouldGetOut = true;
+                    break;
+                default:
+                    if (choice.matches("^-?\\d+$")) {
+                        int page = Integer.parseInt(choice);
+                        if (page > 0 && page <= totalPages) currentPage = page - 1;
+                    } else
+                        System.out.println("Error, debe ingresar una opcion valida del paginador");
+            }
+        }
+        return 0;
+    }
+
+    public static void deleteSelectedContinent(int id) {
+        Continent continent = continentDAO.findById(id);
+        if (continent != null) {
+            String nameToDelete = view.getNameToDelete(continent);
+            if (!nameToDelete.isEmpty()) {
+                Continent continent2 = continentDAO.findByName(nameToDelete);
+
+                if (continent2 != null && continent2.getId() != id) {
+                    view.continentAlreadyExists(nameToDelete);
+                }
+                continent.setNombre(nameToDelete);
+
+                Boolean isDeleted = continentDAO.delete(id);
+
+                if (isDeleted)
+                    view.showDeleteContinent(continent.getNombre());
+            } else
+                view.deleteContinentCanceled();
+        } else {
+            view.continentNotExist(id);
+            int continentIdSelected = view.continentIdSelected("Eliminar");
+            if (continentIdSelected !=0)
+                deleteSelectedContinent(continentIdSelected);
+            else
+                view.deleteContinentCanceled();
+        }
+    }
+    private static void deleteContinent() {
+        int continentIdToDelete = continentListPerPage2();
+        if (continentIdToDelete != 0)
+            deleteSelectedContinent(continentIdToDelete);
+        else
+            view.deleteContinentCanceled();
+        continentListPerPage2();
     }
 }
